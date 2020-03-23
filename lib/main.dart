@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:scan_score/load_image.dart';
 import 'package:scan_score/painter.dart';
 import 'package:scan_score/text_editor.dart';
+import 'package:scan_score/speech_to_text.dart';
 
 void main() {
   runApp(MyApp());
@@ -56,6 +57,14 @@ class _AppMainScreenState extends State<AppMainScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (BuildContext context) => Painterwindow(),
+                    //builder: (BuildContext context) => MyHomePage(),
+                  ));
+    }
+    else if (index==4){
+      Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => SpeechToText(),
                     //builder: (BuildContext context) => MyHomePage(),
                   ));
     }
@@ -114,6 +123,12 @@ class _AppMainScreenState extends State<AppMainScreen> {
             color: Colors.black,
             ),
             title: Text('SketchBoard'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.audiotrack,
+            color: Colors.black,
+            ),
+            title: Text('SpeechToText'),
           ),
         ],
         //currentIndex: _selectedIndex,
