@@ -23,7 +23,6 @@ class LoadImage extends StatelessWidget {
   }
 } 
 
-
 class MyHomePage extends StatefulWidget {
   //MyHomePage({Key key, @required this.data}) : super(key: key);
   

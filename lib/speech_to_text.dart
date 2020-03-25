@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:speech_recognition/speech_recognition.dart';
+import 'package:scan_score/text_editor.dart';
 
 class SpeechToText extends StatelessWidget {
   @override
@@ -114,7 +115,18 @@ class _VoiceHomeState extends State<VoiceHome> {
                 resultText,
                 style: TextStyle(fontSize: 24.0),
               ),
-            )
+            ),
+            RaisedButton(
+                  child: Icon(Icons.mic),
+                  onPressed: () {
+                    Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TextEditor(data: resultText)),
+            );
+                    
+                  },
+                  //backgroundColor: Colors.pink,
+                ),
           ],
         ),
       ),

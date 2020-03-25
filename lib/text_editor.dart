@@ -88,8 +88,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     );
 
     //HTTP Request
-    super.initState();
-    futureAlbum = fetchAlbum();
+    //super.initState();
+    //futureAlbum = fetchAlbum();
   }
 
   void dispose() {
@@ -137,7 +137,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             onPressed: () {
               Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => DisplayResponse()),
+              MaterialPageRoute(builder: (context) => DisplayResponse(value: _controller.text)),
             );
 
             },
