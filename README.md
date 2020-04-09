@@ -1,6 +1,9 @@
 # scan_score
 
-A new Flutter project.
+Creating a solution to grade writeup using Deep Learning.
+Check the working of the Beta version here:
+https://drive.google.com/open?id=1mTdPOKnotYm03vowioELgVzTG_ISPYH_
+
 
 ## Getting Started
 
