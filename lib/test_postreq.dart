@@ -11,7 +11,8 @@ Future<Album> createAlbum(String title) async {
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, String>{
-      'title': title,
+      'text': title,
+      'password':'AQUA121G890UP002',
     }),
   );
 
@@ -31,7 +32,7 @@ class Album {
   factory Album.fromJson(Map<String, dynamic> json) {
     return Album(
       id: json['id'],
-      title: json['title'],
+      title: json['text'],
     );
   }
 }

@@ -34,12 +34,13 @@ Future<Album> fetchAlbum(String data) async {
 Future<Album> fetchAlbum(String title) async {
   final http.Response response = await http.post(
     //'https://jsonplaceholder.typicode.com/albums',
-    'http://7035ca45.ngrok.io',
+    'https://grader-flask-model.herokuapp.com/',
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, String>{
-      'title': title,
+      'text': title,
+      'password':'AQUA121G890UP002',
     }),
   );
 
@@ -50,18 +51,17 @@ Future<Album> fetchAlbum(String title) async {
   }
 }
 
-
 class Album {
   //final int results;
-  final String wwords;
+  final String wordscount;
   final String title;
 
-  Album({this.title, this.wwords});
+  Album({this.title, this.wordscount});
 
   factory Album.fromJson(Map<String, dynamic> json) {
     return Album(
       //results: json['results'],
-      wwords: json['wwords'],
+      wordscount: (json['results']['count']).toString(), 
       title: (json['results']['results']).toString()
     );
   }
@@ -100,14 +100,28 @@ Future<Album> futureAlbum;
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Score'),
+          title: Text(''),
         ),
         body: Center(
           child: FutureBuilder<Album>(
             future: futureAlbum,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Text(snapshot.data.title);
+                //return Text(snapshot.data.title,style: new TextStyle(fontSize: 80.0));
+                return Center( 
+                  heightFactor: 20,
+                  widthFactor: 40,
+                child: new ListView(
+                  padding: const EdgeInsets.fromLTRB(20,150,10,10),
+                  children: <Widget>[
+                    Text('Your Score',style: new TextStyle(fontSize: 40.0)),
+                    Text(snapshot.data.title+" %",style: new TextStyle(fontSize: 80.0)),
+                    Text('Word Count',style: new TextStyle(fontSize: 40.0)),
+                    Text(snapshot.data.wordscount,style: new TextStyle(fontSize: 60.0)),
+
+                  ],
+                  ),
+                );
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
