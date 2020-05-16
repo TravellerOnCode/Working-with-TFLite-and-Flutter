@@ -66,8 +66,12 @@ class _AppMainScreenState extends State<AppMainScreen> {
       Navigator.push(
                   context,
                   MaterialPageRoute(
+<<<<<<< HEAD
                     builder: (BuildContext context) => GradingTFLite(),
                     //builder: (BuildContext context) => Painterwindow(),
+=======
+                    builder: (BuildContext context) => Painterwindow(),
+>>>>>>> f12706266f5e0ed8b8dc56ef7383841604d1c4e4
                     //builder: (BuildContext context) => MyHomePage(),
                   ));
     }
@@ -128,6 +132,7 @@ class _AppMainScreenState extends State<AppMainScreen> {
             ),
             title: Text('SketchBoard'),
           ), */
+<<<<<<< HEAD
           BottomNavigationBarItem(
             icon: Icon(Icons.mic,
             color: Colors.black,
@@ -139,6 +144,13 @@ class _AppMainScreenState extends State<AppMainScreen> {
             color: Colors.black,
             ),
             title: Text('SketchBoard'),
+=======
+          BottomNavigationBarItem(
+            icon: Icon(Icons.mic,
+            color: Colors.black,
+            ),
+            title: Text('Audio'),
+>>>>>>> f12706266f5e0ed8b8dc56ef7383841604d1c4e4
           ),
         
         ],
