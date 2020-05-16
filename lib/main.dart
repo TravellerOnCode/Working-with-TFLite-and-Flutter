@@ -1,9 +1,11 @@
 //import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:scan_score/load_image.dart';
-import 'package:scan_score/painter.dart';
+//import 'package:scan_score/painter.dart';
 import 'package:scan_score/text_editor.dart';
 import 'package:scan_score/speech_to_text.dart';
+import 'package:scan_score/display_response_tflite.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -56,7 +58,7 @@ class _AppMainScreenState extends State<AppMainScreen> {
       Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (BuildContext context) => Painterwindow(),
+                    builder: (BuildContext context) => SpeechToText(),
                     //builder: (BuildContext context) => MyHomePage(),
                   ));
     }
@@ -64,7 +66,8 @@ class _AppMainScreenState extends State<AppMainScreen> {
       Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (BuildContext context) => SpeechToText(),
+                    builder: (BuildContext context) => GradingTFLite(),
+                    //builder: (BuildContext context) => Painterwindow(),
                     //builder: (BuildContext context) => MyHomePage(),
                   ));
     }
@@ -83,7 +86,7 @@ class _AppMainScreenState extends State<AppMainScreen> {
             ),
         ),*/
       body: Center(
-        child: Text("\n<Name>\n\nLet's \nstart \nwriting...",
+        child: Text("\n\n\nLet's \nstart \nwriting...",
             textAlign: TextAlign.left,
             style: TextStyle(
               fontFamily: 'Raleway',
@@ -103,13 +106,14 @@ class _AppMainScreenState extends State<AppMainScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.camera,
             color: Colors.black),
-            title: Text('Gallery',
+            title: Text('Image')
+            /*title: Text('Gallery',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.black12
             )
-            ),
+            ),*/
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.create,
@@ -118,18 +122,25 @@ class _AppMainScreenState extends State<AppMainScreen> {
             ,
             title: Text('Editor'),
           ),
+        /*  BottomNavigationBarItem(
+            icon: Icon(Icons.brush,
+            color: Colors.black,
+            ),
+            title: Text('SketchBoard'),
+          ), */
+          BottomNavigationBarItem(
+            icon: Icon(Icons.mic,
+            color: Colors.black,
+            ),
+            title: Text('Audio'),
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.brush,
             color: Colors.black,
             ),
             title: Text('SketchBoard'),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.audiotrack,
-            color: Colors.black,
-            ),
-            title: Text('SpeechToText'),
-          ),
+        
         ],
         //currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],

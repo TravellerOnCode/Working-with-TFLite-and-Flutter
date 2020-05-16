@@ -56,10 +56,12 @@ class _VoiceHomeState extends State<VoiceHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(
+      body: SafeArea( //Container(
+        child: ListView (
+        padding: const EdgeInsets.fromLTRB(10,100,10,10),
+        /*Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,*/
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -78,8 +80,13 @@ class _VoiceHomeState extends State<VoiceHome> {
                           );
                   },
                 ),
-                RaisedButton(
+                SizedBox(
+                  width: 110,
+                  height: 60,
+
+                child: RaisedButton(
                   child: Icon(Icons.mic),
+                  
                   onPressed: () {
                     if (_isAvailable && !_isListening)
                       _speechRecognition
@@ -87,6 +94,7 @@ class _VoiceHomeState extends State<VoiceHome> {
                           .then((result) => print('$result'));
                   },
                   //backgroundColor: Colors.pink,
+                ),
                 ),
                 RaisedButton(
                   child: Icon(Icons.stop),
@@ -108,7 +116,7 @@ class _VoiceHomeState extends State<VoiceHome> {
                 borderRadius: BorderRadius.circular(6.0),
               ),
               padding: EdgeInsets.symmetric(
-                vertical: 8.0,
+                vertical: 20.0,
                 horizontal: 12.0,
               ),
               child: Text(
@@ -117,19 +125,26 @@ class _VoiceHomeState extends State<VoiceHome> {
               ),
             ),
             RaisedButton(
-                  child: Icon(Icons.mic),
+                  child: //Icon(Icons.mic),
+                      Text('Go to Editor',
+            style: TextStyle(
+              fontSize: 25,
+              //fontWeight: FontWeight.bold,
+              color: Colors.black87
+            )
+            ),
                   onPressed: () {
                     Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => TextEditor(data: resultText)),
-            );
-                    
+            );  
                   },
                   //backgroundColor: Colors.pink,
                 ),
           ],
         ),
       ),
+     // ),
     );
   }
 }

@@ -91,6 +91,7 @@ Future<Album> futureAlbum;
     futureAlbum = fetchAlbum(data);
   }
 
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
