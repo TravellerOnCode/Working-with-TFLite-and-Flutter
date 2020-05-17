@@ -111,6 +111,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
             )
           ),
+          SizedBox(height: 50),
           RaisedButton (
             onPressed: () {
               //double s =_classifier.predict(_controller.text);
