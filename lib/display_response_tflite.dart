@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scan_score/prediction_tflite.dart';
-
-
+    
 class Scorecard extends StatelessWidget{
 
     final List scores;
@@ -42,6 +41,7 @@ class GradingTFLite extends StatefulWidget {
 
 class _GradingTFLite extends State<GradingTFLite> {
   //TextEditingController _controller;
+    
   Classifier _classifier;
   List<Widget> _children;
   String textvalue,score;
@@ -76,7 +76,6 @@ class _GradingTFLite extends State<GradingTFLite> {
                 color: Colors.black
               ),),
                     onPressed: () {
-                      //final text = _controller.text;
                       final prediction = _classifier.predict(textvalue);
                       final scores = prediction.toStringAsFixed(2);
                       final count = _classifier.countwords(textvalue);
@@ -91,6 +90,11 @@ class _GradingTFLite extends State<GradingTFLite> {
                   ));
                   //return CircularProgressIndicator();
                     }
+
+                      ),
+                      TextField(
+                        textAlign: TextAlign.center,
+                        
 
                       ),
         ],
