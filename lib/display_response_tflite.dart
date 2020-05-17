@@ -1,101 +1,103 @@
 import 'package:flutter/material.dart';
 import 'package:scan_score/prediction_tflite.dart';
 
-//void main() => runApp(MyApp());
+
+class Scorecard extends StatelessWidget{
+
+    final List scores;
+    Scorecard({Key key, @required this.scores}) : super(key: key);
+    @override
+    Widget build(BuildContext context)
+    {
+      return Scaffold(
+                            appBar: AppBar(
+                                      title: Text(''),
+                              ),
+                    body: Center( 
+                  heightFactor: 20,
+                  widthFactor: 40,
+                child: new ListView(
+                  padding: const EdgeInsets.fromLTRB(20,150,10,10),
+                  children: <Widget>[
+                    Text('Your Score',style: new TextStyle(fontSize: 40.0)),
+                    Text(scores[0]+" %",style: new TextStyle(fontSize: 80.0)),
+                    Text('Word Count',style: new TextStyle(fontSize: 40.0)),
+                    Text(scores[1],style: new TextStyle(fontSize: 60.0)),
+
+                  ],
+                  ),
+                ),
+                );
+    }
+  }
+
 
 class GradingTFLite extends StatefulWidget {
   @override
-  _GradingTFLite createState() => _GradingTFLite();
+
+  final String textvalue;
+  GradingTFLite({Key key, @required this.textvalue}) : super(key: key);
+  _GradingTFLite createState() => _GradingTFLite(textvalue);
 }
 
 class _GradingTFLite extends State<GradingTFLite> {
-  TextEditingController _controller;
+  //TextEditingController _controller;
   Classifier _classifier;
   List<Widget> _children;
+  String textvalue,score;
+  double scoreval;
+  _GradingTFLite(this.textvalue);
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
+    //_controller = TextEditingController();
     _classifier = Classifier();
     _children = [];
     _children.add(Container());
+    
   }
+
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.orangeAccent,
-          title: const Text('Text classification'),
-        ),
-        body: Container(
-          padding: const EdgeInsets.all(4),
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                  child: ListView.builder(
-                itemCount: _children.length,
-                itemBuilder: (_, index) {
-                  return _children[index];
-                },
-              )),
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.orangeAccent)),
-                child: Row(children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      decoration: const InputDecoration(
-                          hintText: 'Write some text here'),
-                      controller: _controller,
-                    ),
-                  ),
-                  FlatButton(
-                    child: const Text('Classify'),
+      appBar: AppBar(
+        title: const Text(''),
+      ),
+      body: SafeArea(
+      child: ListView (
+        padding: const EdgeInsets.fromLTRB(10,200,10,10),
+        children: <Widget>[
+          RaisedButton(
+                    child: const Text("Let's Go",
+                    style: TextStyle (
+                fontSize: 30,
+                color: Colors.black
+              ),),
                     onPressed: () {
-                      final text = _controller.text;
-                      final prediction = _classifier.predict(text);
-                      print(prediction);
-                      
-                      setState(() {
-                        print(prediction);
-                      /*
-                        _children.add(Dismissible(
-                          key: GlobalKey(),
-                          onDismissed: (direction) {},
-                          child: Card(
-                            child: Container(
-                              padding: const EdgeInsets.all(16),
-                              color: prediction == 1
-                                  ? Colors.lightGreen
-                                  : Colors.red,
-                              child: Column(
-                                children: <Widget>[
-                                  Text(
-                                    text,
-                                    style: const TextStyle(fontSize: 16),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ));
-                        _controller.clear();
-                        */
-                      }
-                      
-                      );
-                    },
-                  ),
-                ]),
-              ),
-            ],
-          ),
-        ),
+                      //final text = _controller.text;
+                      final prediction = _classifier.predict(textvalue);
+                      final scores = prediction.toStringAsFixed(2);
+                      final count = _classifier.countwords(textvalue);
+                      var arr = [scores,count];
+                      print(scores);
+
+                      Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => Scorecard(scores: arr),
+                    
+                  ));
+                  //return CircularProgressIndicator();
+                    }
+
+                      ),
+        ],
+      ),
+      ),
       ),
     );
   }
 }
+   

@@ -16,8 +16,8 @@ class Classifier {
   Interpreter _interpreter;
 
   Classifier() {
-    _loadDictionary();
     _loadModel();
+    _loadDictionary();
   }
 
   void _loadModel() async {
@@ -31,14 +31,32 @@ class Classifier {
     var dict = <String, int>{};
     final vocabList = vocab.split('\n');
     for (var i = 0; i < vocabList.length; i++) {
-      var entry = vocabList[i].trim().split(' ');
-      dict[entry[0]] = int.parse(entry[1]);
+      var entry = vocabList[i].trim().split(':');
+      //print(entry);
+      String key = entry[0];
+      key = key.replaceAll(RegExp(r'"'), '');
+      /*
+      if (i<=3){
+        print(key);
+
+      }
+      */
+      dict[key] = int.parse(entry[1]);
     }
     _dict = dict;
     print('Dictionary loaded successfully');
   }
 
+  String countwords(String rawText)
+  {
+    final toks = rawText.split(' ');
+    int a = toks.length; 
+    return a.toString();
+  }
+
   double predict(String rawText) {
+    //_loadModel();
+    //_loadDictionary();
     print("Prediction Called !");
     print(rawText);
     var input = tokenizeInputText(rawText);
@@ -50,7 +68,7 @@ class Classifier {
     print("Output Received !");
 
     double s = 0;
-    s = output[0][0] as double;
+    s = (output[0][0] as double)*10;
     /*
     if ((output[0][0] as double) > (output[0][1] as double)) {
       s = 0;
@@ -63,8 +81,8 @@ class Classifier {
 
   List<List<double>> tokenizeInputText(String text) {
     final toks = text.split(' ');
-    print(toks);
-    print(_dict);
+    //print(toks);
+    //print(_dict);
     var v = 0;
     var vec = List<double>.filled(_sentenceLen,v.toDouble() );
 
@@ -77,6 +95,8 @@ class Classifier {
       if (index > _sentenceLen) {
         break;
       }
+      //print(tok);
+      tok = tok.replaceAll(RegExp(r'\w\s'), '');
       vec[index++] = _dict.containsKey(tok)
           ? _dict[tok].toDouble()
           : _dict[unk].toDouble();

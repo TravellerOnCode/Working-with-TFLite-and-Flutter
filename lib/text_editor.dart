@@ -3,21 +3,17 @@
 // This sample shows how to get a value from a TextField via the [onSubmitted]
 // callback.
 import 'dart:async';
-//import 'dart:convert';
-
 import 'package:flutter/material.dart';
-//import 'package:http/http.dart' as http;
 import 'package:scan_score/display_response.dart';
-//import 'package:scan_score/load_image.dart';
+import 'package:scan_score/display_response_tflite.dart';
+
 
 const s = "Type Something !";
-//void main() => runApp(TextEditor());
   
 /// This Widget is the main application widget.
 class TextEditor extends StatelessWidget {
   static const String _title = 'Flutter Code Sample';
   final String data;
-  //TextEditor({this.data});
   TextEditor({this.data});
   
 
@@ -32,40 +28,6 @@ class TextEditor extends StatelessWidget {
   }
 }
 
-//Add code to make HTTP Request
-//START
-/*
-Future<Album> fetchAlbum() async {
-  final response = await http.get('https://jsonplaceholder.typicode.com/albums/1');
-
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    return Album.fromJson(json.decode(response.body));
-  } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    throw Exception('Failed to load album');
-  }
-}
-
-
-class Album {
-  final int userId;
-  final int id;
-  final String title;
-
-  Album({this.userId, this.id, this.title});
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      userId: json['userId'],
-      id: json['id'],
-      title: json['title'],
-    );
-  }
-}
-*/
 
 class MyStatefulWidget extends StatefulWidget {
   final String value;
@@ -80,16 +42,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   String value;
   _MyStatefulWidgetState(this.value);
   TextEditingController _controller;
+  //Classifier _classifier;
+  
   Future<Album> futureAlbum;
   void initState() {
     super.initState();
     _controller = TextEditingController(
       text: value
     );
-
-    //HTTP Request
-    //super.initState();
-    //futureAlbum = fetchAlbum();
   }
 
   void dispose() {
@@ -109,6 +69,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         children: <Widget>[
         Center(
         child: TextField(
+          decoration: const InputDecoration(
+            hintText: "Write some text here"
+          ),
           maxLines: null,
           autocorrect: true,
           controller: _controller,
@@ -139,10 +102,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               context,
               MaterialPageRoute(builder: (context) => DisplayResponse(value: _controller.text)),
             );
-
             },
             child: Text(
-              'Evaluate',
+              'Evaluate (API)',
+              style: TextStyle (
+                fontSize: 20,
+                color: Colors.black
+              ),
+            )
+          ),
+          RaisedButton (
+            onPressed: () {
+              //double s =_classifier.predict(_controller.text);
+              //print("Score : "+s.toString());
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => GradingTFLite(textvalue: _controller.text)),
+            );
+            },
+            child: Text(
+              'Evaluate (TFLite)',
               style: TextStyle (
                 fontSize: 20,
                 color: Colors.black
@@ -152,11 +131,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ],
       ),
       ),
-      /*
-      floatingActionButton: new FloatingActionButton(
-        child: new Icon(Icons.clear),
-        onPressed: () => print('clear'),
-      ),*/
     );
   }
 }
