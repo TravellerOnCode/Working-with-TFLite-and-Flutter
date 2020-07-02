@@ -22,7 +22,7 @@ Grading:
   Script for converting the Model to TFLite :
     https://colab.research.google.com/drive/1BXHwQAxLqmjlEob4uw1fLCYFDEHuXVwg?usp=sharing
     
-    [ NOTE: The prediction time on the TFLite Model is slower as compared to the API. ]
+    [ NOTE: The prediction time on the TFLite Model is much faster as compared to the API. ]
 
   2. Using a REST API: The scanned/typed text is sent to an API hosted on Heroku. The detailed implementation is shown in the following repository. (NEED INTERNET)
   Creating an API for the ML Model using Flask + Heroku:
