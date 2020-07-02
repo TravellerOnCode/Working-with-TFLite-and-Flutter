@@ -29,14 +29,20 @@ Grading:
     https://github.com/TravellerOnCode/Deploy-Deep-Learning-Model-to-Flask-TensorFlow-2.2
 
 
-Further work:
-  1. Currently the TFLite Model size is ~35Mb, need to decrease the size.
-  2. Shorten the time required for prediction.
-  3. Improve the UI of the Application
-
-Check the working of the Beta version here:
+# Demo 
+Check the working of the versions here:
+- The model used is an LSTM Based Model of size 34 Mb.
 https://drive.google.com/open?id=13mSx12jvngfj-tTqulQc_r5BwJi8g6hy
 
+- The model used here is a conv1D Model of size 8Mb (quantized size). The inference time has also improved due to quantization. [ THIS IS THE CURRENT VERSION ]
+https://drive.google.com/file/d/1c1iBhPCaOYFJFJrNdkKOXqsVLfyXrqrI/view?usp=drivesdk 
+
+
+Further work:
+  1. Currently the TFLite Model size is ~35Mb, need to decrease the size. [ DONE ]
+  2. Shorten the time required for prediction. [ DONE ]
+  3. Improve the UI of the Application 
+  4. Add Multiple Language Support (Regional Languages)
 
 ..... still improving
 
